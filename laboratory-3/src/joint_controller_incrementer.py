@@ -4,12 +4,13 @@ import rospy
 from std_msgs.msg import String, Float64
 
 class JointControllerIncrementer:
-    def __init__(self):
+    def __init__(self, jointValue):
         self.oldVals = None
+        jointTopic = '/robot/joint' + str(jointValue) + '_position_controller/command'
         
-        self.pub = rospy.Publisher('/robot/joint1_position_controller/command', Float64, queue_size=10)
+        self.pub = rospy.Publisher(jointTopic, Float64, queue_size=10)
 
-        rospy.Subscriber('/robot/joint1_position_controller/command', Float64, self.storeOldVals)
+        rospy.Subscriber(jointTopic, Float64, self.storeOldVals)
         rospy.Subscriber('joint_data_input', Float64, self.checkNewInputAndPublish)
         rospy.loginfo("Please publish new values on /joint_data_input")
 
@@ -29,9 +30,10 @@ class JointControllerIncrementer:
                     self.pub.publish(newData)
 
 def main():
+    jointValue = 1
     # Init ROS node
     rospy.init_node('jointControllerIncrementer', anonymous=True)
-    jointControllerIncrementer = JointControllerIncrementer()
+    jointControllerIncrementer = JointControllerIncrementer(jointValue)
 
     try:
         rospy.spin()

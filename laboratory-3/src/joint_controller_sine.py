@@ -5,12 +5,13 @@ import math
 from std_msgs.msg import String, Float64
 
 class JointControllerSine:
-    def __init__(self):
+    def __init__(self, jointValue):
         self.start = rospy.get_rostime()
         self.now = rospy.get_rostime()
         self.curPose = 0
+        jointTopic = '/robot/joint' + str(jointValue) + '_position_controller/command'
         
-        self.pub = rospy.Publisher('/robot/joint1_position_controller/command', Float64, queue_size=10)
+        self.pub = rospy.Publisher(jointTopic, Float64, queue_size=10)
 
     def sineFunction(self):
         self.now = rospy.get_time()
@@ -18,11 +19,11 @@ class JointControllerSine:
         self.pub.publish(math.sin(self.now))
 
 
-
 def main():
+    jointValue = 1
     # Init ROS node
     rospy.init_node('jointControllerSine', anonymous=True,  disable_signals=True)
-    jointControllerSine = JointControllerSine()
+    jointControllerSine = JointControllerSine(jointValue)
     while True:
         jointControllerSine.sineFunction()
 
