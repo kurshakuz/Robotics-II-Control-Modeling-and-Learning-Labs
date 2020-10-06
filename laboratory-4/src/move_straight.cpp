@@ -25,18 +25,16 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped target_pose; // Pose in ROS is implemented using geometry_msgs::PoseStamped, google what is the type of this msg
     current_pose = move_group.getCurrentPose(); /* Retrieving the information about the current position and orientation of the end effector*/
     target_pose = current_pose;
-    target_pose.pose.position.x = target_pose.pose.position.x - 0.14; /* Basically our target pose is the same as current, except that we want to move it a little bit along x-axis*/
-    
+    target_pose.pose.position.x = target_pose.pose.position.x - 1.4; /* Basically our target pose is the same as current, except that we want to move it a little bit along x-axis*/
     
     ros::Rate loop_rate(50); //Frequency
-
 
     while (ros::ok()){
         move_group.setApproximateJointValueTarget(target_pose); // To calculate the trajectory
         move_group.move(); // Move the robot
 
         current_pose = move_group.getCurrentPose();
-        if (abs(current_pose.pose.position.x - target_pose.pose.position.x) < 0.1)
+        if (abs(current_pose.pose.position.x - target_pose.pose.position.x) < 0.5)
         {
             break; // Basically, check if we reached the desired position
         }
