@@ -1,6 +1,7 @@
 # Laboratory 6.
 
 ### Initial architecture 
+Initial architecture with untuned parameters has shown mean error accuracy 28.8%.
 
 ![](./images/17-19-58.png)
 ![](./images/17-20-11.png)
