@@ -12,7 +12,7 @@ Insertion of additional fully-connected layers and increase in number of neurons
 
 
 ### Data Validation
-To further improve training process and reduce overtrain, main data was split into train and validation parts. Accuracy decreased and was 24.37%.
+To further improve training process and reduce overfitting, the main data was split into train and validation parts. Cross Validation is a very useful technique for assessing the effectiveness of the model, particularly in cases where overfitting needs to be mitigated. Accuracy decreased and was 24.37% (because of less available training data).
 ![](./images/22-34-10.png)
 
 
@@ -31,7 +31,7 @@ Finally, all updates were integrated into the same script for the training proce
 
 
 ### Final results
-To further increase accuracy and reduce the rate of overtraining, bigger number of validation data (5k) was used at the cost of training data (45k). Final achieved accuracy was found to be 16.5%.
+To further increase accuracy and reduce the rate of overfitting, bigger number of validation data (5k) was used at the cost of training data (45k). Final achieved accuracy was found to be 16.5%.
 
 ![](./images/23-16-58.png)
 ![](./images/23-17-16-crop.png)
